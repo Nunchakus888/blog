@@ -1,4 +1,4 @@
-###Notes..
+### Notes..
 
 + state :
     - 组件状态, 控制UI
@@ -11,7 +11,7 @@
     - 可以通过给组件添加类属性 defaultProps 来配置默认参数。
     - 父组件重新渲染会传入新的 props 以及更新。
     - _使用自定义组件的时候，可以在其中嵌套 JSX 结构。嵌套的结构在组件内部都可以通过 props.children 获取到_
-#####state是让组件控制自己的状态，props是让外部对组件自己进行配置。
+##### state是让组件控制自己的状态，props是让外部对组件自己进行配置。
 
 + 钩子函数
     - componentWillMount ：组件挂载开始之前，也就是在组件调用 render 方法之前调用。(一些组件启动的动作，包括像 Ajax 数据的拉取操作、一些定时器的启动等可以放在componentWillMount里面处理。)
@@ -22,7 +22,7 @@
     - componentWillUpdate()：组件开始重新渲染之前调用。
     - componentDidUpdate()：组件重新渲染并且把更改变更到真实的 DOM 以后调用。
 
-######abcdefg......
+###### abcdefg......
 + React.js 当中提供了 ref 属性 我们可以给任意代表 HTML 元素标签加上 ref 从而获取到它 DOM 元素然后调用 DOM API。但是记住一个原则：能不用 ref 就不用
 + 也可以给组件标签也加上 ref
 + 通过 PropTypes 给组件的参数做类型限制
@@ -40,6 +40,6 @@
 ** render() 方法。
 ```
 
-#####Redux & React-Redux
+##### Redux & React-Redux
 + Redux 是一种架构模式（Flux 架构的一种变种），它不关注你到底用什么库，你可以把它应用到 React 和 Vue，甚至跟 jQuery 结合都没有问题。
 而 React-redux 就是把 Redux 这种架构模式和 React.js 结合起来的一个库，就是 Redux 架构在 React.js 中的体现。
