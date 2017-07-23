@@ -1,4 +1,5 @@
-##### 首先，不管在windows，linux还是mac osx系统，java配置原理都是一样的，不同的只是✍️书写方式。
+##JDK 
+##### 首先，不管在windows，linux还是mac osx系统，java配置原理都是一样的，不同的只是✍️书写方式。 
 ```
 .bash_profile
 
@@ -26,7 +27,7 @@ export PATH
 
 然后退出vi编辑器使用如下命令：
 
-- 输入 ese  
+- 输入 esc  
 - 输入冒号 : wq 
 - 保存退出  
 
@@ -39,3 +40,16 @@ source .bash_profile
 完毕以后查看下当前的java 版本是否正确输入如下命令：
 
 java -version
+
+##tomcat 
+[下载tomcat](http://tomcat.apache.org/download-70.cgi)
+```
+cd ～
+vi .bash_profile
+加入环境变量
+export PATH=$PATH:/Library/apache-tomcat-7.0.76/bin
+保存
+
+```
+
+
