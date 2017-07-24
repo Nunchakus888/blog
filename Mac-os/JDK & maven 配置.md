@@ -1,4 +1,4 @@
-##JDK 
+## JDK 
 ##### 首先，不管在windows，linux还是mac osx系统，java配置原理都是一样的，不同的只是✍️书写方式。 
 ```
 .bash_profile
@@ -41,7 +41,7 @@ source .bash_profile
 
 java -version
 
-##tomcat 
+## tomcat 
 [下载tomcat](http://tomcat.apache.org/download-70.cgi)
 ```
 cd ～

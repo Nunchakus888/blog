@@ -1,4 +1,4 @@
-###<ul> Terminal折腾记</ul> 
+### Terminal折腾记 
 重度 `windows cmd`依赖用户，切到Mac上来百般不适。。。注定是一条无休止的折腾路。。
 
 + 终端tab自动补全：
