@@ -1,5 +1,5 @@
 ### Terminal折腾记 
-重度 `windows cmd`依赖用户，切到Mac上来百般不适。。。注定是一条无休止的折腾路。。
+重度 `windows cmd`依赖用户，切到Mac上来百般不适。。。注定是一条无休止的折腾路。。那就来吧，前面走过的坑坑洼洼走一次就行了，往后简单粗暴，copy即可！
 
 + 终端tab自动补全：
     - 配置tab自动补全功能，需要用root用户权限，我们先启动root权限：
@@ -17,12 +17,18 @@
         6.End.
         ```
  
-+ 终端配色
++ 终端主题&git分支名自动补全
     - install <br/>
         `sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
         
     - theme <br/>
-        `nano ~/.zshrc
-`
+        `nano ~/.zshrc` <br/>
+        编辑ZSH_THEME=`"robbyrussell"` 
+        [示例](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)
+        
+    - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/blob/master/README.md)
     
-`
++ 最后上个效果图િ🙄ી
+    + ![](https://github.com/Nunchakus888/blog/blob/master/Mac-os/img/terminal.png)
+    
+#### 关于终端折腾是一不归路，走不到头。以上配置，可以满足绝大多数场景的高效coding了，所以我们本着时间精力花费的最大性价比化，只知其然，足矣！
