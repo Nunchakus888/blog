@@ -18,3 +18,11 @@
         ```
  
 + 终端配色
+    - install <br/>
+        `sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
+        
+    - theme <br/>
+        `nano ~/.zshrc
+`
+    
+`
