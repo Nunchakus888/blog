@@ -83,6 +83,27 @@ var Days;
 })(Days || (Days = {}));
 ```
 
-       
+### 装饰器
+```
+declare type ClassDecorator = 
+<TFunction extends Function>(target: TFunction) => TFunction | void
 
+
+
+function Greeter(target: Function): void {
+  target.prototype.greet = function (): void {
+    console.log('Hello!');
+  }
+}
+
+@Greeter
+class Greeting {
+  constructor() {
+    // 内部实现
+  }
+}
+
+let myGreeting = new Greeting();
+myGreeting.greet(); // console output: 'Hell
+```
 
