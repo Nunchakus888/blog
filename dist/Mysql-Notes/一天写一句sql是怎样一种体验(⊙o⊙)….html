@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>才发现好多文件都是.sql文件命名的😄 - 哦😯😯😯😯😯😯😯😯😯哦</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="../assets/css/bulma.min.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="../index.html">
+      哦😯😯😯😯😯😯😯😯😯哦
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../Mysql-Notes/index.html" class="breadcrumb-item">Mysql相关</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html" class="breadcrumb-item">才发现好多文件都是.sql文件命名的😄</a></div>
+    <h1 class="article-title">才发现好多文件都是.sql文件命名的😄</h1>
+    <div class="article">
+      <h1 id="关于一天只写出一句sql这种事">关于一天只写出一句sql这种事.... <a class="markdownIt-Anchor" href="#关于一天只写出一句sql这种事">#</a></h1>
+<h2 id="刚开始是这样的">刚开始是这样的: <a class="markdownIt-Anchor" href="#刚开始是这样的">#</a></h2>
+<p>SELECT<br>
+USERNAME,<br>
+MSG_DETAIL AS MSGDETAIL,<br>
+COUNT(case when LOGLEVEL='warn' then LOGLEVEL end) AS COUNTSQL,<br>
+COUNT(case when LOGLEVEL='Error' then LOGLEVEL end) AS COUNTERROR,<br>
+COUNT(MSG_DETAIL) AS TOTALITEM,<br>
+AVG(SQL_TAKETIME) AS SQLTAKETIME<br>
+FROM t_log<br>
+where APINAME='fxd_latest_quotation' AND CURDATE() &lt;= CREATETIME<br>
+GROUP BY MSG_DETAIL, USERNAME<br>
+ORDER BY SQLTAKETIME DESC LIMIT 0, 20</p>
+<h2 id="需要分页show出总页数我想一条sql完成不然每次请求不同接口都要单独写计算总页数的查询听起来好low有没有">需要分页show出总页数,我想一条sql完成,不然每次请求不同接口都要单独写计算总页数的查询,听起来好low有没有? <a class="markdownIt-Anchor" href="#需要分页show出总页数我想一条sql完成不然每次请求不同接口都要单独写计算总页数的查询听起来好low有没有">#</a></h2>
+<h2 id="机智的我第一反应当然是count出-group-by-后的总条数wuwuwu老司机开车了">机智的我第一反应当然是:count出 group by 后的总条数...wuwuwu,老司机开车了<sub>|</sub>~ <a class="markdownIt-Anchor" href="#机智的我第一反应当然是count出-group-by-后的总条数wuwuwu老司机开车了">#</a></h2>
+<p>SELECT<br>
+USERNAME AS USERNAME,<br>
+MSG_DETAIL AS MSGDETAIL,<br>
+COUNT(LOGID) AS TOTALITEM,<br>
+COUNTSQL AS COUNTSQL,<br>
+COUNTERROR AS COUNTERROR,<br>
+SQLTAKETIME AS SQLTAKETIME,</p>
+<p>FROM<br>
+(SELECT USERNAME,<br>
+MSG_DETAIL,<br>
+LOGID,<br>
+COUNT(case when LOGLEVEL='warn' then LOGLEVEL end) AS COUNTSQL,<br>
+COUNT(case when LOGLEVEL='Error' then LOGLEVEL end) AS COUNTERROR,<br>
+AVG(SQL_TAKETIME) AS SQLTAKETIME<br>
+FROM t_log<br>
+WHERE APINAME='TF_ContinuousContractInfo' AND CURDATE() &lt;= CREATETIME<br>
+GROUP BY MSG_DETAIL,USERNAME<br>
+) TL<br>
+ORDER BY SQLTAKETIME DESC LIMIT 0,20</p>
+<h2 id="然后就是加上group-by-数据显示okbut-count的是单条数据的记录1一上午过去了我还在end-looper-mdzzbut-这就死心了-怎么可能---⊙o⊙小司机啊小司机大兵大兵">然后就是加上GROUP BY 数据显示ok,but count的是单条数据的记录===1,一上午过去了,我还在end looper MDZZ!!!,but 这就死心了? 怎么可能---(⊙o⊙)…小司机啊小司机/大兵/大兵 <a class="markdownIt-Anchor" href="#然后就是加上group-by-数据显示okbut-count的是单条数据的记录1一上午过去了我还在end-looper-mdzzbut-这就死心了-怎么可能---⊙o⊙小司机啊小司机大兵大兵">#</a></h2>
+<p>SELECT<br>
+SQL_CALC_FOUND_ROWS<br>
+FOUND_ROWS() AS TOTALITEM,<br>
+USERNAME,<br>
+MSG_DETAIL AS MSGDETAIL,<br>
+COUNT(case when LOGLEVEL='warn' then LOGLEVEL end) AS COUNTSQL,<br>
+COUNT(case when LOGLEVEL='Error' then LOGLEVEL end) AS COUNTERROR,<br>
+AVG(SQL_TAKETIME) AS SQLTAKETIME FROM t_log<br>
+WHERE APINAME='fxd_daily_quotation' AND CURDATE() &lt;= CREATETIME<br>
+GROUP BY MSG_DETAIL,USERNAME<br>
+ORDER BY SQLTAKETIME DESC<br>
+LIMIT 0, 20</p>
+<h2 id="万能的google给我跳到了mysql-官网哈哈哈最烦看官网文档了直晕头不过硬是看了个七七八八">万能的Google,给我跳到了MySQL-官网,哈哈哈,最烦看官网文档了...直晕头,不过硬是看了个七七八八. <a class="markdownIt-Anchor" href="#万能的google给我跳到了mysql-官网哈哈哈最烦看官网文档了直晕头不过硬是看了个七七八八">#</a></h2>
+<h2 id="undefined"> <a class="markdownIt-Anchor" href="#undefined">#</a></h2>
+<h2 id="只想大喊一声best-solution-然而放到项目组傻了在mysql-编辑器上运行的好好的通过mybatis一跑">只想大喊一声:Best solution~ 然而放到项目组傻了~在MySQL-编辑器上运行的好好的,通过mybatis一跑 <a class="markdownIt-Anchor" href="#只想大喊一声best-solution-然而放到项目组傻了在mysql-编辑器上运行的好好的通过mybatis一跑">#</a></h2>
+<h2 id="都显示成1了然而回去mysql编辑器一切恢复正常md初步我将它归为灵异事件">都显示成1了,然而回去mysql编辑器一切恢复正常...MD.初步我将它归为灵异事件.... <a class="markdownIt-Anchor" href="#都显示成1了然而回去mysql编辑器一切恢复正常md初步我将它归为灵异事件">#</a></h2>
+<h2 id="满怀心事的吃完饭去了加班回来再跟你大战三百回合k">满怀心事的吃完饭去了...加班回来再跟你大战三百回合....k. <a class="markdownIt-Anchor" href="#满怀心事的吃完饭去了加班回来再跟你大战三百回合k">#</a></h2>
+<h2 id="最后得知在不加sql_calc_found_rows的情况下found_rows计算的就是limit中的查询到的数目加上的话是所有符合条件数据的总数而且带上一次查询结果的缓存的前一条语句加上sql_calc_found_rows查询的结果会在之后的任何一条查询语句中出现真是坑爹仅限第一次查询so">最后得知:在不加SQL_CALC_FOUND_ROWS的情况下FOUND_ROWS()计算的就是limit中的查询到的数目.加上的话是所有符合条件数据的总数,而且带上一次查询结果的缓存的,前一条语句加上SQL_CALC_FOUND_ROWS查询的结果会在之后的任何一条查询语句中出现...真是坑爹(仅限第一次查询)...so~~~~ <a class="markdownIt-Anchor" href="#最后得知在不加sql_calc_found_rows的情况下found_rows计算的就是limit中的查询到的数目加上的话是所有符合条件数据的总数而且带上一次查询结果的缓存的前一条语句加上sql_calc_found_rows查询的结果会在之后的任何一条查询语句中出现真是坑爹仅限第一次查询so">#</a></h2>
+<h2 id="ΩΩΩΩ把我坑的好辛苦继续换">ΩΩΩΩ把我坑的好辛苦....继续换!! <a class="markdownIt-Anchor" href="#ΩΩΩΩ把我坑的好辛苦继续换">#</a></h2>
+<h2 id="加班">加班... <a class="markdownIt-Anchor" href="#加班">#</a></h2>
+<h2 id="会不会最笨的方法是最有效的呢哈哈哈哈哈哈哈">会不会最笨的方法是最有效的呢?哈哈哈哈哈哈哈: <a class="markdownIt-Anchor" href="#会不会最笨的方法是最有效的呢哈哈哈哈哈哈哈">#</a></h2>
+<p>SELECT<br>
+USERNAME,<br>
+MSG_DETAIL AS MSGDETAIL,<br>
+LOGID,<br>
+##### 然后我给用mybatis的动态sql给它此处加了判断,只有第一次请求执行这个多重嵌套sql<br>
+(select count(*) from<br>
+(select * from t_log<br>
+where APINAME='V_Interest_Rate' AND CURDATE() &lt;= CREATETIME<br>
+GROUP BY MSG_DETAIL, USERNAME)<br>
+a) AS TOTALITEM,<br>
+   ##### 到此为止可以松一口气了,总算是不要每一次请求,再附加个请求,先拿到总页数,再拿数据(leader让我这样做的,然后劳资硬死磕一天,什么蠢方法,不干 了!)<br>
+COUNT(case when LOGLEVEL='warn' then LOGLEVEL end) AS COUNTSQL,<br>
+COUNT(case when LOGLEVEL='Error' then LOGLEVEL end) AS COUNTERROR,<br>
+AVG(SQL_TAKETIME) AS SQLTAKETIME<br>
+FROM t_log<br>
+WHERE APINAME='V_Interest_Rate' AND CURDATE() &lt;= CREATETIME<br>
+GROUP BY MSG_DETAIL,USERNAME<br>
+ORDER BY SQLTAKETIME DESC LIMIT 0,20</p>
+<h2 id="这次绝对不会再说best-solution了也许还有更好的方法等来日见证哈哈哈-now--2000000000">这次绝对不会再说....Best solution...了,也许还有更好的方法..等来日见证哈哈哈 .Now() === 20:00:00.0000 <a class="markdownIt-Anchor" href="#这次绝对不会再说best-solution了也许还有更好的方法等来日见证哈哈哈-now--2000000000">#</a></h2>
+<h2 id="下班明天双十一噢好像跟我没什么关系">下班.明天双十一..噢,好像跟我没什么关系~~ <a class="markdownIt-Anchor" href="#下班明天双十一噢好像跟我没什么关系">#</a></h2>
+<h1 id="还有要记一下count就count别理会什么limit丝毫不受影响的好吗">还有要记一下,count就count,别理会什么limit,丝毫不受影响的好吗? <a class="markdownIt-Anchor" href="#还有要记一下count就count别理会什么limit丝毫不受影响的好吗">#</a></h1>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="../Mysql-Notes/index.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="../gitNotes/index.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+    <div class="column is-3 is-offset-9 build-by">
+        😄િ😂ીિ😇ીિ😄ીિ🙄ી
+        <!-- Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1 -->
+    </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="../FE/index.html">FE</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../FE/css.html">css基础🤦‍♂️</a></li><li class="chapter-item "><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></li><li class="chapter-item "><a href="../FE/webpack.html">webpack-dev-server 1min速配</a></li><li class="chapter-item "><a href="../FE/react-notes.html">react初试</a></li><li class="chapter-item "><a href="../FE/typescript.html">typescript</a></li></ul><li class="chapter-item "><a href="../Mac-os/index.html">Mac折腾记</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../Mac-os/JDK & maven 配置.html">JDK&java工程相关</a></li><li class="chapter-item "><a href="../Mac-os/terminal折腾记.html">terminal折腾记</a></li></ul><li class="chapter-item "><a href="../life/index.html">life</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../life/sun air water milk book story beauty but no time.html">😄吐槽</a></li><li class="chapter-item "><a href="../life/2017/2017-08-13-写给即将要上高中的表妹.html">写给即将上高中的表妹</a></li><ul class="chapter-level-2"></ul><li class="chapter-item "><a href="../Mysql-Notes/index.html">Mysql相关</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-collapse" data-icon="collapse"></span></a></li><li class="chapter-item chapter-item-current"><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html">才发现好多文件都是.sql文件命名的😄</a></li></ul><li class="chapter-item "><a href="../gitNotes/index.html">Git</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../gitNotes/密钥1min速配.html">各种密钥1min速配</a></li></ul></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….md';
+  LOPPO.relative_root_path = '../';
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E5%88%9A%E5%BC%80%E5%A7%8B%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84\">刚开始是这样的:</a></li>\n<li><a href=\"#%E9%9C%80%E8%A6%81%E5%88%86%E9%A1%B5show%E5%87%BA%E6%80%BB%E9%A1%B5%E6%95%B0%E6%88%91%E6%83%B3%E4%B8%80%E6%9D%A1sql%E5%AE%8C%E6%88%90%E4%B8%8D%E7%84%B6%E6%AF%8F%E6%AC%A1%E8%AF%B7%E6%B1%82%E4%B8%8D%E5%90%8C%E6%8E%A5%E5%8F%A3%E9%83%BD%E8%A6%81%E5%8D%95%E7%8B%AC%E5%86%99%E8%AE%A1%E7%AE%97%E6%80%BB%E9%A1%B5%E6%95%B0%E7%9A%84%E6%9F%A5%E8%AF%A2%E5%90%AC%E8%B5%B7%E6%9D%A5%E5%A5%BDlow%E6%9C%89%E6%B2%A1%E6%9C%89\">需要分页show出总页数,我想一条sql完成,不然每次请求不同接口都要单独写计算总页数的查询,听起来好low有没有?</a></li>\n<li><a href=\"#%E6%9C%BA%E6%99%BA%E7%9A%84%E6%88%91%E7%AC%AC%E4%B8%80%E5%8F%8D%E5%BA%94%E5%BD%93%E7%84%B6%E6%98%AFcount%E5%87%BA-group-by-%E5%90%8E%E7%9A%84%E6%80%BB%E6%9D%A1%E6%95%B0wuwuwu%E8%80%81%E5%8F%B8%E6%9C%BA%E5%BC%80%E8%BD%A6%E4%BA%86\">机智的我第一反应当然是:count出 group by 后的总条数...wuwuwu,老司机开车了<sub>|</sub>~</a></li>\n<li><a href=\"#%E7%84%B6%E5%90%8E%E5%B0%B1%E6%98%AF%E5%8A%A0%E4%B8%8Agroup-by-%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BAokbut-count%E7%9A%84%E6%98%AF%E5%8D%95%E6%9D%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AE%B0%E5%BD%951%E4%B8%80%E4%B8%8A%E5%8D%88%E8%BF%87%E5%8E%BB%E4%BA%86%E6%88%91%E8%BF%98%E5%9C%A8end-looper-mdzzbut-%E8%BF%99%E5%B0%B1%E6%AD%BB%E5%BF%83%E4%BA%86-%E6%80%8E%E4%B9%88%E5%8F%AF%E8%83%BD---%E2%8A%99o%E2%8A%99%E5%B0%8F%E5%8F%B8%E6%9C%BA%E5%95%8A%E5%B0%8F%E5%8F%B8%E6%9C%BA%E5%A4%A7%E5%85%B5%E5%A4%A7%E5%85%B5\">然后就是加上GROUP BY 数据显示ok,but count的是单条数据的记录===1,一上午过去了,我还在end looper MDZZ!!!,but 这就死心了? 怎么可能---(⊙o⊙)…小司机啊小司机/大兵/大兵</a></li>\n<li><a href=\"#%E4%B8%87%E8%83%BD%E7%9A%84google%E7%BB%99%E6%88%91%E8%B7%B3%E5%88%B0%E4%BA%86mysql-%E5%AE%98%E7%BD%91%E5%93%88%E5%93%88%E5%93%88%E6%9C%80%E7%83%A6%E7%9C%8B%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%E4%BA%86%E7%9B%B4%E6%99%95%E5%A4%B4%E4%B8%8D%E8%BF%87%E7%A1%AC%E6%98%AF%E7%9C%8B%E4%BA%86%E4%B8%AA%E4%B8%83%E4%B8%83%E5%85%AB%E5%85%AB\">万能的Google,给我跳到了MySQL-官网,哈哈哈,最烦看官网文档了...直晕头,不过硬是看了个七七八八.</a></li>\n<li><a href=\"#%E5%8F%AA%E6%83%B3%E5%A4%A7%E5%96%8A%E4%B8%80%E5%A3%B0best-solution-%E7%84%B6%E8%80%8C%E6%94%BE%E5%88%B0%E9%A1%B9%E7%9B%AE%E7%BB%84%E5%82%BB%E4%BA%86%E5%9C%A8mysql-%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8A%E8%BF%90%E8%A1%8C%E7%9A%84%E5%A5%BD%E5%A5%BD%E7%9A%84%E9%80%9A%E8%BF%87mybatis%E4%B8%80%E8%B7%91\">只想大喊一声:Best solution~ 然而放到项目组傻了~在MySQL-编辑器上运行的好好的,通过mybatis一跑</a></li>\n<li><a href=\"#%E9%83%BD%E6%98%BE%E7%A4%BA%E6%88%901%E4%BA%86%E7%84%B6%E8%80%8C%E5%9B%9E%E5%8E%BBmysql%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%80%E5%88%87%E6%81%A2%E5%A4%8D%E6%AD%A3%E5%B8%B8md%E5%88%9D%E6%AD%A5%E6%88%91%E5%B0%86%E5%AE%83%E5%BD%92%E4%B8%BA%E7%81%B5%E5%BC%82%E4%BA%8B%E4%BB%B6\">都显示成1了,然而回去mysql编辑器一切恢复正常...MD.初步我将它归为灵异事件....</a></li>\n<li><a href=\"#%E6%BB%A1%E6%80%80%E5%BF%83%E4%BA%8B%E7%9A%84%E5%90%83%E5%AE%8C%E9%A5%AD%E5%8E%BB%E4%BA%86%E5%8A%A0%E7%8F%AD%E5%9B%9E%E6%9D%A5%E5%86%8D%E8%B7%9F%E4%BD%A0%E5%A4%A7%E6%88%98%E4%B8%89%E7%99%BE%E5%9B%9E%E5%90%88k\">满怀心事的吃完饭去了...加班回来再跟你大战三百回合....k.</a></li>\n<li><a href=\"#%E6%9C%80%E5%90%8E%E5%BE%97%E7%9F%A5%E5%9C%A8%E4%B8%8D%E5%8A%A0sql_calc_found_rows%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8Bfound_rows%E8%AE%A1%E7%AE%97%E7%9A%84%E5%B0%B1%E6%98%AFlimit%E4%B8%AD%E7%9A%84%E6%9F%A5%E8%AF%A2%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE%E5%8A%A0%E4%B8%8A%E7%9A%84%E8%AF%9D%E6%98%AF%E6%89%80%E6%9C%89%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E6%95%B0%E6%8D%AE%E7%9A%84%E6%80%BB%E6%95%B0%E8%80%8C%E4%B8%94%E5%B8%A6%E4%B8%8A%E4%B8%80%E6%AC%A1%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98%E7%9A%84%E5%89%8D%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5%E5%8A%A0%E4%B8%8Asql_calc_found_rows%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BC%9A%E5%9C%A8%E4%B9%8B%E5%90%8E%E7%9A%84%E4%BB%BB%E4%BD%95%E4%B8%80%E6%9D%A1%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9C%9F%E6%98%AF%E5%9D%91%E7%88%B9%E4%BB%85%E9%99%90%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%9F%A5%E8%AF%A2so\">最后得知:在不加SQL_CALC_FOUND_ROWS的情况下FOUND_ROWS()计算的就是limit中的查询到的数目.加上的话是所有符合条件数据的总数,而且带上一次查询结果的缓存的,前一条语句加上SQL_CALC_FOUND_ROWS查询的结果会在之后的任何一条查询语句中出现...真是坑爹(仅限第一次查询)...so~~~~</a></li>\n<li><a href=\"#%CE%A9%CE%A9%CE%A9%CE%A9%E6%8A%8A%E6%88%91%E5%9D%91%E7%9A%84%E5%A5%BD%E8%BE%9B%E8%8B%A6%E7%BB%A7%E7%BB%AD%E6%8D%A2\">ΩΩΩΩ把我坑的好辛苦....继续换!!</a></li>\n<li><a href=\"#%E5%8A%A0%E7%8F%AD\">加班...</a></li>\n<li><a href=\"#%E4%BC%9A%E4%B8%8D%E4%BC%9A%E6%9C%80%E7%AC%A8%E7%9A%84%E6%96%B9%E6%B3%95%E6%98%AF%E6%9C%80%E6%9C%89%E6%95%88%E7%9A%84%E5%91%A2%E5%93%88%E5%93%88%E5%93%88%E5%93%88%E5%93%88%E5%93%88%E5%93%88\">会不会最笨的方法是最有效的呢?哈哈哈哈哈哈哈:</a></li>\n<li><a href=\"#%E8%BF%99%E6%AC%A1%E7%BB%9D%E5%AF%B9%E4%B8%8D%E4%BC%9A%E5%86%8D%E8%AF%B4best-solution%E4%BA%86%E4%B9%9F%E8%AE%B8%E8%BF%98%E6%9C%89%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%96%B9%E6%B3%95%E7%AD%89%E6%9D%A5%E6%97%A5%E8%A7%81%E8%AF%81%E5%93%88%E5%93%88%E5%93%88-now--2000000000\">这次绝对不会再说....Best solution...了,也许还有更好的方法..等来日见证哈哈哈 .Now() === 20:00:00.0000</a></li>\n<li><a href=\"#%E4%B8%8B%E7%8F%AD%E6%98%8E%E5%A4%A9%E5%8F%8C%E5%8D%81%E4%B8%80%E5%99%A2%E5%A5%BD%E5%83%8F%E8%B7%9F%E6%88%91%E6%B2%A1%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB\">下班.明天双十一..噢,好像跟我没什么关系~~</a></li>\n</ul>\n";
+</script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
+

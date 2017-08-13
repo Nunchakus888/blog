@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>Typescript learn notes~~ - 哦😯😯😯😯😯😯😯😯😯哦</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="../assets/css/bulma.min.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="../index.html">
+      哦😯😯😯😯😯😯😯😯😯哦
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../FE/index.html" class="breadcrumb-item">FE</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../FE/typescript.html" class="breadcrumb-item">typescript</a></div>
+    <h1 class="article-title">Typescript learn notes~~</h1>
+    <div class="article">
+      <p>1.Typescript类型断言，将 something 断言成 string</p>
+<pre class="hljs"><code>function getLength(something: string | number): number {
+  if ((&lt;string&gt;something).length) {
+    return (&lt;string&gt;something).length;
+  } else {
+    return something.toString().length;
+  }
+}
+</code></pre>
+<p>在需要断言的变量前加上 &lt; Type &gt; 即可。类型断言不是类型转换，<br>
+断言成一个联合类型中不存在的类型是不允许的：</p>
+<pre class="hljs"><code>function toBoolean(something: string | number): boolean {
+  return &lt;boolean&gt;something;
+}
+
+// index.ts(2,10): error TS2352: Type 'string | number' cannot be converted to type 'boolean'.
+//   Type 'number' is not comparable to type 'boolean'.
+</code></pre>
+<p>接口中函数的定义我们也可以使用接口的方式来定义一个函数需要符合的形状：</p>
+<pre class="hljs"><code>interface SearchFunc {
+  (source: string, subString: string): boolean;
+}
+
+let mySearch: SearchFunc;
+mySearch = function(source: string, subString: string) {
+  return source.search(subString) !== -1;
+}
+</code></pre>
+<ul>
+<li>declare定义的类型只会用于编译时的检查，编译结果中会被删除。</li>
+<li>接口可以继承接口</li>
+<li>接口可以继承类</li>
+</ul>
+<ul>
+<li>
+<p>public修饰的属性或方法是公有的，可以在任何地方被访问到，默认所有的属性和方法都是 public 的</p>
+</li>
+<li>
+<p>private修饰的属性或方法是私有的，不能在声明它的类的外部访问</p>
+</li>
+<li>
+<p>抽象类是不允许被实例化, 抽象类中的抽象方法必须被子类实现:</p>
+</li>
+</ul>
+<pre class="hljs"><code>abstract class Animal {
+  public name;
+  public constructor(name) {
+    this.name = name;
+  }
+  public abstract sayHi();
+}
+
+class Cat extends Animal {
+  public sayHi() {
+    console.log(`Meow, My name is ${this.name}`);
+  }
+}
+</code></pre>
+<p>枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。<br>
+枚举成员会被赋值为从 0 开始递增的数字，同时也会对枚举值到枚举名进行反向映射：</p>
+<pre class="hljs"><code>
+enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+
+console.log(Days[&quot;Sun&quot;] === 0); // true
+console.log(Days[&quot;Mon&quot;] === 1); // true
+console.log(Days[&quot;Tue&quot;] === 2); // true
+console.log(Days[&quot;Sat&quot;] === 6); // true
+
+console.log(Days[0] === &quot;Sun&quot;); // true
+console.log(Days[1] === &quot;Mon&quot;); // true
+console.log(Days[2] === &quot;Tue&quot;); // true
+console.log(Days[6] === &quot;Sat&quot;); // true
+</code></pre>
+<p>编译后--------我看笑了, 挺有意思:</p>
+<pre class="hljs"><code>var Days;
+(function (Days) {
+  Days[Days[&quot;Sun&quot;] = 0] = &quot;Sun&quot;;
+  Days[Days[&quot;Mon&quot;] = 1] = &quot;Mon&quot;;
+  Days[Days[&quot;Tue&quot;] = 2] = &quot;Tue&quot;;
+  Days[Days[&quot;Wed&quot;] = 3] = &quot;Wed&quot;;
+  Days[Days[&quot;Thu&quot;] = 4] = &quot;Thu&quot;;
+  Days[Days[&quot;Fri&quot;] = 5] = &quot;Fri&quot;;
+  Days[Days[&quot;Sat&quot;] = 6] = &quot;Sat&quot;;
+})(Days || (Days = {}));
+</code></pre>
+<h3 id="装饰器">装饰器 <a class="markdownIt-Anchor" href="#装饰器">#</a></h3>
+<pre class="hljs"><code>declare type ClassDecorator = 
+&lt;TFunction extends Function&gt;(target: TFunction) =&gt; TFunction | void
+
+
+
+function Greeter(target: Function): void {
+  target.prototype.greet = function (): void {
+    console.log('Hello!');
+  }
+}
+
+@Greeter
+class Greeting {
+  constructor() {
+    // 内部实现
+  }
+}
+
+let myGreeting = new Greeting();
+myGreeting.greet(); // console output: 'Hell
+</code></pre>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="../FE/react-notes.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="../Mac-os/index.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+    <div class="column is-3 is-offset-9 build-by">
+        😄િ😂ીિ😇ીિ😄ીિ🙄ી
+        <!-- Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1 -->
+    </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="../FE/index.html">FE</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-collapse" data-icon="collapse"></span></a></li><ul class="chapter-level-1 chapter-level-1-current"><li class="chapter-item "><a href="../FE/css.html">css基础🤦‍♂️</a></li><li class="chapter-item "><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></li><li class="chapter-item "><a href="../FE/webpack.html">webpack-dev-server 1min速配</a></li><li class="chapter-item "><a href="../FE/react-notes.html">react初试</a></li><li class="chapter-item chapter-item-current"><a href="../FE/typescript.html">typescript</a></li></ul><li class="chapter-item "><a href="../Mac-os/index.html">Mac折腾记</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../Mac-os/JDK & maven 配置.html">JDK&java工程相关</a></li><li class="chapter-item "><a href="../Mac-os/terminal折腾记.html">terminal折腾记</a></li></ul><li class="chapter-item "><a href="../life/index.html">life</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../life/sun air water milk book story beauty but no time.html">😄吐槽</a></li><li class="chapter-item "><a href="../life/2017/2017-08-13-写给即将要上高中的表妹.html">写给即将上高中的表妹</a></li><ul class="chapter-level-2"></ul><li class="chapter-item "><a href="../Mysql-Notes/index.html">Mysql相关</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><li class="chapter-item "><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html">才发现好多文件都是.sql文件命名的😄</a></li></ul><li class="chapter-item "><a href="../gitNotes/index.html">Git</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../gitNotes/密钥1min速配.html">各种密钥1min速配</a></li></ul></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'FE/typescript.md';
+  LOPPO.relative_root_path = '../';
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li>\n<ul>\n<li><a href=\"#%E8%A3%85%E9%A5%B0%E5%99%A8\">装饰器</a></li>\n</ul>\n</li>\n</ul>\n";
+</script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
+

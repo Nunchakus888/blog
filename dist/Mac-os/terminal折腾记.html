@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>## Terminal折腾记  - 哦😯😯😯😯😯😯😯😯😯哦</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="../assets/css/bulma.min.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="../index.html">
+      哦😯😯😯😯😯😯😯😯😯哦
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../Mac-os/index.html" class="breadcrumb-item">Mac折腾记</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../Mac-os/terminal折腾记.html" class="breadcrumb-item">terminal折腾记</a></div>
+    <h1 class="article-title">## Terminal折腾记 </h1>
+    <div class="article">
+      <p>重度 <code>windows cmd</code>依赖用户，切到Mac上来百般不适。。。注定是一条无休止的折腾路。。那就来吧，前面走过的坑坑洼洼走一次就行了，往后简单粗暴，copy即可！</p>
+<ul>
+<li>
+<p>终端tab自动补全：</p>
+<ul>
+<li>配置tab自动补全功能，需要用root用户权限，我们先启动root权限：</li>
+<li>偏好设置--&gt; 用户与群组--&gt; 解锁 --&gt; 网络账户服务器--&gt; 加入--&gt; 打开目录使用工具--&gt; 解锁设置root权限--&gt;上锁退出</li>
+<li>打开终端：<pre class="hljs"><code>1.su root 然后登录
+2.输入 nano .inputrc
+3.输入内容：
+set completion-ignore-case on  
+set show-all-if-ambiguous on  
+TAB:menu-complete  
+4.ctru + o 
+5.可以再新开个终端试试tab是否生效
+6.End.
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>终端主题&amp;git分支名自动补全</p>
+<ul>
+<li>
+<p>install <br/><br>
+<code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></p>
+</li>
+<li>
+<p>theme <br/><br>
+<code>nano ~/.zshrc</code> <br/><br>
+编辑ZSH_THEME=<code>&quot;robbyrussell&quot;</code><br>
+<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="noopener">示例</a></p>
+</li>
+<li>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/README.md" target="_blank" rel="noopener">oh-my-zsh</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>最后上个效果图િ🙄ી<br>
+<img src="https://github.com/Nunchakus888/blog/blob/master/Mac-os/img/terminal.png" alt=""></p>
+</li>
+</ul>
+<h4 id="关于终端折腾是一不归路，走不到头。以上配置，可以满足绝大多数场景的高效coding了，所以我们本着时间精力花费的最大性价比化，爱装逼，不求无敌！">关于终端折腾是一不归路，走不到头。以上配置，可以满足绝大多数场景的高效coding了，所以我们本着时间精力花费的最大性价比化，爱装逼，不求无敌！ <a class="markdownIt-Anchor" href="#关于终端折腾是一不归路，走不到头。以上配置，可以满足绝大多数场景的高效coding了，所以我们本着时间精力花费的最大性价比化，爱装逼，不求无敌！">#</a></h4>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="../Mac-os/JDK & maven 配置.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="../life/index.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+    <div class="column is-3 is-offset-9 build-by">
+        😄િ😂ીિ😇ીિ😄ીિ🙄ી
+        <!-- Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1 -->
+    </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="../FE/index.html">FE</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../FE/css.html">css基础🤦‍♂️</a></li><li class="chapter-item "><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></li><li class="chapter-item "><a href="../FE/webpack.html">webpack-dev-server 1min速配</a></li><li class="chapter-item "><a href="../FE/react-notes.html">react初试</a></li><li class="chapter-item "><a href="../FE/typescript.html">typescript</a></li></ul><li class="chapter-item "><a href="../Mac-os/index.html">Mac折腾记</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-collapse" data-icon="collapse"></span></a></li><ul class="chapter-level-1 chapter-level-1-current"><li class="chapter-item "><a href="../Mac-os/JDK & maven 配置.html">JDK&java工程相关</a></li><li class="chapter-item chapter-item-current"><a href="../Mac-os/terminal折腾记.html">terminal折腾记</a></li></ul><li class="chapter-item "><a href="../life/index.html">life</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../life/sun air water milk book story beauty but no time.html">😄吐槽</a></li><li class="chapter-item "><a href="../life/2017/2017-08-13-写给即将要上高中的表妹.html">写给即将上高中的表妹</a></li><ul class="chapter-level-2"></ul><li class="chapter-item "><a href="../Mysql-Notes/index.html">Mysql相关</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><li class="chapter-item "><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html">才发现好多文件都是.sql文件命名的😄</a></li></ul><li class="chapter-item "><a href="../gitNotes/index.html">Git</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../gitNotes/密钥1min速配.html">各种密钥1min速配</a></li></ul></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'Mac-os/terminal折腾记.md';
+  LOPPO.relative_root_path = '../';
+  LOPPO.article_toc = "";
+</script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
+

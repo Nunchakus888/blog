@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title># 中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记િ🙄ી&致敬大佬们 - 哦😯😯😯😯😯😯😯😯😯哦</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="../assets/css/bulma.min.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="../index.html">
+      哦😯😯😯😯😯😯😯😯😯哦
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../FE/index.html" class="breadcrumb-item">FE</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html" class="breadcrumb-item">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></div>
+    <h1 class="article-title"># 中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记િ🙄ી&致敬大佬们</h1>
+    <div class="article">
+      <h3 id="angularjs双向数据绑定">AngularJs双向数据绑定 <a class="markdownIt-Anchor" href="#angularjs双向数据绑定">#</a></h3>
+<pre><code>AngularJS 1.x会为每一个进行数据绑定的HTML标签创建一个watcher。然后，当发生任何可能会导致数据模型被修改的情况下，就会启动一轮$digest循环，把所有watcher全部运行一遍，看看有没有东西需要自己更新（目前Vue的实现思想与此类似，它底层使用了Object.defineProperty）。AngularJS 1.x在这个地方还有一个实现细节也非常糟糕，它为了保证数据模型的改动不会丢失，可能会重复运行多次$digest循环，而且搞了一个TTL机制，如果$digest循环检查了10次，发现模型还没有稳定下来，直接抛异常。
+-脏值检测的效率问题：在AngularJS 1.x里面，这个问题没有得到很好的解决。它每次都会生成一份对象副本，当发生修改之后，会把新的对象和原来的对象进行“深比较”。当JS对象的结构非常深的时候，Tree型遍历会消耗大量的CPU时间，因为Tree型遍历一般需要递归，而在JS里面做递归运行效率非常差。同时因为每次都拷贝一个对象副本，内存占用也比较大，这就是你们在网上看到很多吐槽说AngularJS 1.x的数据绑定有效率问题的根本原因。
+</code></pre>
+<h3 id="angular2-双向数据绑定">Angular2+ 双向数据绑定 <a class="markdownIt-Anchor" href="#angular2-双向数据绑定">#</a></h3>
+<pre><code>如何才能检测到某个JS对象的值被修改了：新版本的Angular引入了Zones.js，并在此基础上做了自己的封装，Zones会拦截所有可能修改数据模型的操作。实际上在浏览器环境下，只有3个典型的异步回调才可能造成数据模型被修改：事件回调、Ajax回调、定时器回调。所以，Zones.js拦截了所有这些回调函数，自己做了代理。这样，它就可以在数据发生修改的时候精确地给Angular发出通知，因此，在Angular新版本里面，不会再出现更新丢失的问题，你再也不用自己去手动调用该死的$apply()方法了。
+- 脏值检测的效率问题：新版本的Angular引入了RxJS+Immutable的设计，非常有效地避开了这个问题。根据Victor Savkin的说法，这个全新的实现把运行效率从O(N)提升到了O(logN)。所以，在新版本的Angular里面，不再存在所谓的“绑定效率”问题了，有一些无脑黑的文章还在扯这个问题，明显是胡说。
+</code></pre>
+<h3 id="aotjit">AOT&amp;JIT <a class="markdownIt-Anchor" href="#aotjit">#</a></h3>
+<pre><code>AOT(Ahead Of Time，预编译)是和JIT(Just In Time，即时编译)相对应的一个概念，
+虽然JavaScript代码是解释执行的，
+但是浏览器在执行JS代码的时候同样需要编译，
+这种`一边编译一遍执行的方式叫做JIT`。
+JIT存在一些问题，首先是 `效率不够高，其次是没法做深度的代码优化`。
+tree-shaking的意思是“摇树”，这是一个非常生动形象的比喻，当你摇一颗树的时候，那些枯萎的叶子就会掉下来。而我们在编写应用的过程，经常会有一些代码可能根本用不到，
+有了tree-shaking之后，这些用不到的东西就可以自动被摇掉，
+从而可以保证最终打包出来的应用体积足够小。
+如果没有静态类型的TypeScript，要实现tree-shaking也会非常麻烦。
+</code></pre>
+<h3 id="to-be-continued">To be continued.. <a class="markdownIt-Anchor" href="#to-be-continued">#</a></h3>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="../FE/css.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="../FE/webpack.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+    <div class="column is-3 is-offset-9 build-by">
+        😄િ😂ીિ😇ીિ😄ીિ🙄ી
+        <!-- Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1 -->
+    </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="../FE/index.html">FE</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-collapse" data-icon="collapse"></span></a></li><ul class="chapter-level-1 chapter-level-1-current"><li class="chapter-item "><a href="../FE/css.html">css基础🤦‍♂️</a></li><li class="chapter-item chapter-item-current"><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></li><li class="chapter-item "><a href="../FE/webpack.html">webpack-dev-server 1min速配</a></li><li class="chapter-item "><a href="../FE/react-notes.html">react初试</a></li><li class="chapter-item "><a href="../FE/typescript.html">typescript</a></li></ul><li class="chapter-item "><a href="../Mac-os/index.html">Mac折腾记</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../Mac-os/JDK & maven 配置.html">JDK&java工程相关</a></li><li class="chapter-item "><a href="../Mac-os/terminal折腾记.html">terminal折腾记</a></li></ul><li class="chapter-item "><a href="../life/index.html">life</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../life/sun air water milk book story beauty but no time.html">😄吐槽</a></li><li class="chapter-item "><a href="../life/2017/2017-08-13-写给即将要上高中的表妹.html">写给即将上高中的表妹</a></li><ul class="chapter-level-2"></ul><li class="chapter-item "><a href="../Mysql-Notes/index.html">Mysql相关</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><li class="chapter-item "><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html">才发现好多文件都是.sql文件命名的😄</a></li></ul><li class="chapter-item "><a href="../gitNotes/index.html">Git</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../gitNotes/密钥1min速配.html">各种密钥1min速配</a></li></ul></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md';
+  LOPPO.relative_root_path = '../';
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li>\n<ul>\n<li><a href=\"#angularjs%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A\">AngularJs双向数据绑定</a></li>\n<li><a href=\"#angular2-%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A\">Angular2+ 双向数据绑定</a></li>\n<li><a href=\"#aotjit\">AOT&amp;JIT</a></li>\n<li><a href=\"#to-be-continued\">To be continued..</a></li>\n</ul>\n</li>\n</ul>\n";
+</script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
+

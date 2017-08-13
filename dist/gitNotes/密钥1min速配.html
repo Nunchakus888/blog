@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>密钥1min速配 - 哦😯😯😯😯😯😯😯😯😯哦</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="../assets/css/bulma.min.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="../index.html">
+      哦😯😯😯😯😯😯😯😯😯哦
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../gitNotes/index.html" class="breadcrumb-item">Git</a><span class="breadcrumb-delimiter"> &gt; </span><a href="../gitNotes/密钥1min速配.html" class="breadcrumb-item">各种密钥1min速配</a></div>
+    <h1 class="article-title">密钥1min速配</h1>
+    <div class="article">
+      <h2 id="openssh">OpenSSH <a class="markdownIt-Anchor" href="#openssh">#</a></h2>
+<h3 id="简单粗暴，1-2-3-4-5-6-·step">简单粗暴，1-2-3-4-5-6 ·step <a class="markdownIt-Anchor" href="#简单粗暴，1-2-3-4-5-6-·step">#</a></h3>
+<ul>
+<li>
+<p>进入目录：</p>
+<pre class="hljs"><code>    cd ~/.ssh
+</code></pre>
+</li>
+<li>
+<p>自动生成密🔑文件，文件名可自定义，默认rsa</p>
+<pre class="hljs"><code>    ssh-keygen -t rsa -C &quot;hello@world.com&quot; -b 4096
+     生成两个文件：
+         # id_rsa:       私钥文件
+         # id_rsa.pub:   公钥文件
+</code></pre>
+</li>
+<li>
+<p>将<code>publicKey</code>公🔑添加到本地ssh环境，否则会<code>permission denied</code>！</p>
+<pre class="hljs"><code>    ssh-add rsa
+</code></pre>
+</li>
+<li>
+<p>copy🔑</p>
+<pre class="hljs"><code>    pbcopy &lt; ~/.ssh/rsa.pub
+</code></pre>
+<p>或者查看，手动copy</p>
+<pre class="hljs"><code>    cat id_rsa.pub
+</code></pre>
+</li>
+<li>
+<p>在git仓库添加ssh key，直接粘。</p>
+</li>
+<li>
+<p>测试：</p>
+<pre class="hljs"><code>    ssh -T git@mdzz.im
+</code></pre>
+</li>
+</ul>
+<h2 id="openssl">OpenSSL <a class="markdownIt-Anchor" href="#openssl">#</a></h2>
+<h3 id="首先，生成私钥，然后生成公钥">首先，生成私钥，然后生成公钥 <a class="markdownIt-Anchor" href="#首先，生成私钥，然后生成公钥">#</a></h3>
+<pre class="hljs"><code>openssl genrsa -out private_key.pem 4096
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+</code></pre>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="../gitNotes/index.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link link-disabled"><span class="icon icon-next-disabled" data-icon="next-disabled"></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+    <div class="column is-3 is-offset-9 build-by">
+        😄િ😂ીિ😇ીિ😄ીિ🙄ી
+        <!-- Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1 -->
+    </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="../FE/index.html">FE</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../FE/css.html">css基础🤦‍♂️</a></li><li class="chapter-item "><a href="../FE/2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.html">2017-08-04中国大地的各大开发者社区统统被Angular&Vue的撕逼大战刷屏-几近波及世界😄-那些大佬真是着急了什么话都能说得出来啊-干货满满的-我默默点赞-默默吃瓜-默默做笔记.md</a></li><li class="chapter-item "><a href="../FE/webpack.html">webpack-dev-server 1min速配</a></li><li class="chapter-item "><a href="../FE/react-notes.html">react初试</a></li><li class="chapter-item "><a href="../FE/typescript.html">typescript</a></li></ul><li class="chapter-item "><a href="../Mac-os/index.html">Mac折腾记</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../Mac-os/JDK & maven 配置.html">JDK&java工程相关</a></li><li class="chapter-item "><a href="../Mac-os/terminal折腾记.html">terminal折腾记</a></li></ul><li class="chapter-item "><a href="../life/index.html">life</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><ul class="chapter-level-1"><li class="chapter-item "><a href="../life/sun air water milk book story beauty but no time.html">😄吐槽</a></li><li class="chapter-item "><a href="../life/2017/2017-08-13-写给即将要上高中的表妹.html">写给即将上高中的表妹</a></li><ul class="chapter-level-2"></ul><li class="chapter-item "><a href="../Mysql-Notes/index.html">Mysql相关</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-expand" data-icon="expand"></span></a></li><li class="chapter-item "><a href="../Mysql-Notes/一天写一句sql是怎样一种体验(⊙o⊙)….html">才发现好多文件都是.sql文件命名的😄</a></li></ul><li class="chapter-item "><a href="../gitNotes/index.html">Git</a>&nbsp;<a class="first-level-collapse"><span class="icon icon-collapse" data-icon="collapse"></span></a></li><ul class="chapter-level-1 chapter-level-1-current"><li class="chapter-item chapter-item-current"><a href="../gitNotes/密钥1min速配.html">各种密钥1min速配</a></li></ul></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'gitNotes/密钥1min速配.md';
+  LOPPO.relative_root_path = '../';
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#openssh\">OpenSSH</a>\n<ul>\n<li><a href=\"#%E7%AE%80%E5%8D%95%E7%B2%97%E6%9A%B4%EF%BC%8C1-2-3-4-5-6-%C2%B7step\">简单粗暴，1-2-3-4-5-6 ·step</a></li>\n</ul>\n</li>\n<li><a href=\"#openssl\">OpenSSL</a>\n<ul>\n<li><a href=\"#%E9%A6%96%E5%85%88%EF%BC%8C%E7%94%9F%E6%88%90%E7%A7%81%E9%92%A5%EF%BC%8C%E7%84%B6%E5%90%8E%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5\">首先，生成私钥，然后生成公钥</a></li>\n</ul>\n</li>\n</ul>\n";
+</script>
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>
+
